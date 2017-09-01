@@ -66,12 +66,15 @@ public class WoordenController implements Initializable {
     @FXML
     private void aantalAction(ActionEvent event) {
         datatructurer.setWords(taInput.getText());
+        taOutput.clear();
         taOutput.setText("Totaal aantal woorden: " + datatructurer.getWords().size() + "\nAantal verschillende woorden: " + datatructurer.getHashSet().size());
     }
 
     @FXML
     private void sorteerAction(ActionEvent event) {
-         throw new UnsupportedOperationException("Not supported yet."); 
+        datatructurer.setWords(taInput.getText());
+        taOutput.clear();
+        taOutput.setText(datatructurer.getTreeSet().toString());
     }
 
     @FXML
