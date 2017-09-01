@@ -15,6 +15,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
+import logic.Datastructurer;
 
 /**
  * FXML Controller class
@@ -22,6 +23,7 @@ import javafx.scene.control.TextArea;
  * @author frankcoenen
  */
 public class WoordenController implements Initializable {
+    private Datastructurer datatructurer = new Datastructurer();
     
    private static final String DEFAULT_TEXT =   "Een, twee, drie, vier\n" +
                                                 "Hoedje van, hoedje van\n" +
@@ -63,7 +65,8 @@ public class WoordenController implements Initializable {
     
     @FXML
     private void aantalAction(ActionEvent event) {
-         throw new UnsupportedOperationException("Not supported yet."); 
+        datatructurer.setWords(taInput.getText());
+        taOutput.setText("Totaal aantal woorden: " + datatructurer.getWords().size() + "\nAantal verschillende woorden: " + datatructurer.getHashSet().size());
     }
 
     @FXML
