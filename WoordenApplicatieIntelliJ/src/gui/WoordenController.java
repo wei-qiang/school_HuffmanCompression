@@ -79,7 +79,9 @@ public class WoordenController implements Initializable {
 
     @FXML
     private void frequentieAction(ActionEvent event) {
-         throw new UnsupportedOperationException("Not supported yet."); 
+        datatructurer.setWords(taInput.getText());
+        taOutput.clear();
+        taOutput.setText(datatructurer.getHashMap().toString());
     }
 
     @FXML
