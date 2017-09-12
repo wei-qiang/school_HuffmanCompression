@@ -19,6 +19,10 @@ public class Datastructurer {
         return words;
     }
 
+    public ArrayList<String> getSentence(){
+        return sentence;
+    }
+
     public HashSet getHashSet() {
         generateHashsetAantal();
         return hashSet;
