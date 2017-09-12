@@ -81,7 +81,7 @@ public class WoordenController implements Initializable {
     private void frequentieAction(ActionEvent event) {
         datastructurer.setWords(taInput.getText());
         taOutput.clear();
-        taOutput.setText(datastructurer.getHashMap(true).toString());
+        taOutput.setText(datastructurer.getTreeMap().toString());
     }
 
     @FXML
@@ -89,7 +89,7 @@ public class WoordenController implements Initializable {
         datastructurer.setWords(taInput.getText());
         datastructurer.setSentence(taInput.getText());
         taOutput.clear();
-        taOutput.setText(datastructurer.getHashMap(false).toString());
+        taOutput.setText(datastructurer.getHashMap().toString());
     }
    
 }

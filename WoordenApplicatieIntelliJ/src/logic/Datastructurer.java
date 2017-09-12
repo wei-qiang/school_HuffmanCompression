@@ -10,7 +10,12 @@ public class Datastructurer {
     private ArrayList<String> sentence = new ArrayList<>();
     private HashSet hashSet = new HashSet();
     private TreeSet treeSet = new TreeSet(Collections.reverseOrder());
-    private HashMap hashMap = new HashMap();
+    private HashMap hashMap = new HashMap();   //hashmap voor de concordantie functie
+
+    private HashMap<String, Double> map = new HashMap<String, Double>();         //hashmap voor de frequentie functie
+    private ValueComparator bvc = new ValueComparator(map);
+    private TreeMap<String, Double> sorted_map = new TreeMap<String, Double>(bvc);
+
 
     public Datastructurer() {
     }
@@ -33,15 +38,14 @@ public class Datastructurer {
         return treeSet;
     }
 
-    //boolean frequentie true genereert de frequentie opdracht
-    public HashMap getHashMap(boolean frequentie) {
-        if(frequentie){
-            generateHashmapFrequentie();
-        }
-        else{
-            generateHashmapConcordantie();
-        }
+    public HashMap getHashMap() {
+        generateHashmapConcordantie();
         return hashMap;
+    }
+
+    public TreeMap getTreeMap(){
+        generateHashmapFrequentie();
+        return sorted_map;
     }
 
     public void setWords(String words) {
@@ -66,16 +70,19 @@ public class Datastructurer {
     }
 
     public void generateHashmapFrequentie(){
-        hashMap.clear();
+        map.clear();
         Set<String> set = getHashSet();
         for (String word: set){
-            hashMap.put(word, 0);
+            map.put(word, 0.0);
         }
 
         for(String word:getWords()){
-            int wordcount = (int) hashMap.get(word);
-            hashMap.put(word, wordcount + 1);
+            double wordcount = (double) map.get(word);
+            map.put(word, wordcount + 1.0);
         }
+
+        sorted_map.putAll(map);
+
     }
 
     public void generateHashmapConcordantie(){
@@ -98,3 +105,24 @@ public class Datastructurer {
         }
     }
 }
+
+class ValueComparator implements Comparator<String> {
+    Map<String, Double> base;
+
+    public ValueComparator(Map<String, Double> base) {
+        this.base = base;
+    }
+
+    // Note: this comparator imposes orderings that are inconsistent with
+    // equals.
+    public int compare(String a, String b) {
+        if (base.get(a) >= base.get(b)) {
+            return -1;
+        } else {
+            return 1;
+        } // returning 0 would merge keys
+    }
+}
+
+
+
