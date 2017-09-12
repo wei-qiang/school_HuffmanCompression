@@ -7,6 +7,7 @@ import java.util.*;
  */
 public class Datastructurer {
     private ArrayList<String> words = new ArrayList<>();
+    private ArrayList<String> sentence = new ArrayList<>();
     private HashSet hashSet = new HashSet();
     private TreeSet treeSet = new TreeSet(Collections.reverseOrder());
     private HashMap hashMap = new HashMap();
@@ -19,36 +20,49 @@ public class Datastructurer {
     }
 
     public HashSet getHashSet() {
-        generateHashset();
+        generateHashsetAantal();
         return hashSet;
     }
 
     public TreeSet getTreeSet() {
-        generateTreeset();
+        generateTreesetSorteer();
         return treeSet;
     }
 
-    public HashMap getHashMap() {
-        generateHashmap();
+    //boolean frequentie true genereert de frequentie opdracht
+    public HashMap getHashMap(boolean frequentie) {
+        if(frequentie){
+            generateHashmapFrequentie();
+        }
+        else{
+            generateHashmapConcordantie();
+        }
         return hashMap;
     }
 
     public void setWords(String words) {
         this.words = new ArrayList<>(Arrays.asList(words.split(", |\n| ")));
-        this.words.remove("");
+        while(this.words.contains("")) {
+            this.words.remove("");
+        }
     }
 
-    public void generateHashset(){
+    public void setSentence(String words){
+        this.sentence = new ArrayList<>(Arrays.asList(words.split("\n")));
+    }
+
+    public void generateHashsetAantal(){
         hashSet.clear();
         hashSet.addAll(words);
     }
 
-    public void generateTreeset(){
+    public void generateTreesetSorteer(){
         treeSet.clear();
         treeSet.addAll(words);
     }
 
-    public void generateHashmap(){
+    public void generateHashmapFrequentie(){
+        hashMap.clear();
         Set<String> set = getHashSet();
         for (String word: set){
             hashMap.put(word, 0);
@@ -58,6 +72,25 @@ public class Datastructurer {
             int wordcount = (int) hashMap.get(word);
             hashMap.put(word, wordcount + 1);
         }
+    }
 
+    public void generateHashmapConcordantie(){
+        hashMap.clear();
+        int counter = 1;
+
+        Set<String> set = getHashSet();
+        for (String word: set){
+           hashMap.put(word,"");
+        }
+
+        for(String sentence:sentence){
+            setWords(sentence);
+            
+            for(String word: words){
+                String sentenceln = (String) hashMap.get(word);
+                hashMap.put(word, sentenceln+ " " + counter + ", ");
+            }
+            counter = counter + 1;
+        }
     }
 }
