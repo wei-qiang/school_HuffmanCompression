@@ -40,7 +40,7 @@ class DatastructurerTest {
     void generateHashmapConcordantie() {
         dataStructurer.setWords("hoi ik \n hoi jij \n jij bent");
         dataStructurer.setSentence("hoi ik \n hoi jij \n jij bent");
-        Assert.assertEquals("{ik= 1, , hoi= 1,  2, , bent= 3, , jij= 2,  3, }", dataStructurer.getHashMap().toString());
+        Assert.assertEquals("{ik= 1/ , hoi= 1/  2/ , bent= 3/ , jij= 2/  3/ }", dataStructurer.getHashMap().toString());
     }
 
 }

@@ -24,7 +24,7 @@ public class Datastructurer {
         return words;
     }
 
-    public ArrayList<String> getSentence(){
+    public ArrayList<String> getSentence() {
         return sentence;
     }
 
@@ -43,63 +43,62 @@ public class Datastructurer {
         return hashMap;
     }
 
-    public TreeMap getTreeMap(){
+    public TreeMap getTreeMap() {
         generateHashmapFrequentie();
         return sorted_map;
     }
 
     public void setWords(String words) {
         this.words = new ArrayList<>(Arrays.asList(words.split(", |\n| ")));
-        while(this.words.contains("")) {
+        while (this.words.contains("")) {
             this.words.remove("");
         }
     }
 
-    public void setSentence(String words){
+    public void setSentence(String words) {
         this.sentence = new ArrayList<>(Arrays.asList(words.split("\n")));
     }
 
-    public void generateHashsetAantal(){
+    public void generateHashsetAantal() {
         hashSet.clear();
         hashSet.addAll(words);
     }
 
-    public void generateTreesetSorteer(){
+    public void generateTreesetSorteer() {
         treeSet.clear();
         treeSet.addAll(words);
     }
 
-    public void generateHashmapFrequentie(){
+    public void generateHashmapFrequentie() {
         map.clear();
+        sorted_map.clear();
         Set<String> set = getHashSet();
-        for (String word: set){
+        for (String word : set) {
             map.put(word, 0.0);
         }
 
-        for(String word:getWords()){
+        for (String word : getWords()) {
             double wordcount = (double) map.get(word);
             map.put(word, wordcount + 1.0);
         }
-
         sorted_map.putAll(map);
-
     }
 
-    public void generateHashmapConcordantie(){
+    public void generateHashmapConcordantie() {
         hashMap.clear();
         int counter = 1;
 
         Set<String> set = getHashSet();
-        for (String word: set){
-           hashMap.put(word,"");
+        for (String word : set) {
+            hashMap.put(word, "");
         }
 
-        for(String sentence:sentence){
+        for (String sentence : sentence) {
             setWords(sentence);
-            
-            for(String word: words){
+
+            for (String word : words) {
                 String sentenceln = (String) hashMap.get(word);
-                hashMap.put(word, sentenceln+ " " + counter + ", ");
+                hashMap.put(word, sentenceln + " " + counter + "/ ");
             }
             counter = counter + 1;
         }
