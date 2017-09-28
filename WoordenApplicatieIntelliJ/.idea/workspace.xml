@@ -2,12 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/WoordenApplicatieIntelliJ/logic/Datastructurer.class" afterPath="$PROJECT_DIR$/out/production/WoordenApplicatieIntelliJ/logic/Datastructurer.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/WoordenApplicatieIntelliJ/logic/DatastructurerTest.class" afterPath="$PROJECT_DIR$/out/production/WoordenApplicatieIntelliJ/logic/DatastructurerTest.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/WoordenApplicatieIntelliJ/logic/ValueComparator.class" afterPath="$PROJECT_DIR$/out/production/WoordenApplicatieIntelliJ/logic/ValueComparator.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/logic/Datastructurer.java" afterPath="$PROJECT_DIR$/src/logic/Datastructurer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/logic/DatastructurerTest.java" afterPath="$PROJECT_DIR$/src/logic/DatastructurerTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Huffman/out/production/Huffman/sample/TextCompressor.class" afterPath="$PROJECT_DIR$/../Huffman/out/production/Huffman/sample/TextCompressor.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Huffman/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../Huffman/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Huffman/src/sample/TextCompressor.java" afterPath="$PROJECT_DIR$/../Huffman/src/sample/TextCompressor.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Huffman/src/sample/TreeNode.java" afterPath="$PROJECT_DIR$/../Huffman/src/sample/TreeNode.java" />
     </list>
     <ignored path="JavaFxApplication.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -101,8 +99,8 @@
       <file leaf-file-name="Datastructurer.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/logic/Datastructurer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1411">
-              <caret line="107" column="0" lean-forward="false" selection-start-line="107" selection-start-column="0" selection-end-line="123" selection-end-column="1" />
+            <state relative-caret-position="680">
+              <caret line="117" column="8" lean-forward="true" selection-start-line="117" selection-start-column="8" selection-end-line="121" selection-end-column="9" />
               <folding />
             </state>
           </provider>
@@ -747,7 +745,7 @@
       <workItem from="1504688184490" duration="89000" />
       <workItem from="1505204741187" duration="11915000" />
       <workItem from="1505816191263" duration="3867000" />
-      <workItem from="1506588852125" duration="1427000" />
+      <workItem from="1506588852125" duration="2849000" />
     </task>
     <servers />
   </component>
@@ -784,7 +782,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="31989000" />
+    <option name="totallyTimeSpent" value="33411000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -1201,8 +1199,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/logic/Datastructurer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1411">
-          <caret line="107" column="0" lean-forward="false" selection-start-line="107" selection-start-column="0" selection-end-line="123" selection-end-column="1" />
+        <state relative-caret-position="680">
+          <caret line="117" column="8" lean-forward="true" selection-start-line="117" selection-start-column="8" selection-end-line="121" selection-end-column="9" />
           <folding />
         </state>
       </provider>

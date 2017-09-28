@@ -25,4 +25,18 @@ public class TreeNode {
     public TreeNode getChild1() {
         return child1;
     }
+
+    public int getFrequentie(){
+        return frequentie;
+    }
+
+    @Override
+    public String toString() {
+        return "TreeNode{" +
+                "frequentie=" + frequentie +
+                ", child0=" + child0 +
+                ", child1=" + child1 +
+                ", value='" + value + '\'' +
+                '}';
+    }
 }
