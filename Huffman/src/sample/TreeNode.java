@@ -1,7 +1,10 @@
 package sample;
 
-public class TreeNode {
+import java.io.Serializable;
+
+public class TreeNode implements Serializable{
     private int frequentie;
+    private TreeNode parent;
     private TreeNode child0;
     private TreeNode child1;
     private String value;
@@ -16,6 +19,8 @@ public class TreeNode {
         this.frequentie = child0.frequentie + child1.frequentie;
         this.child0 = child0;
         this.child1 = child1;
+        child0.setParent(this);
+        child1.setParent(this);
     }
 
     public TreeNode getChild0() {
@@ -26,8 +31,37 @@ public class TreeNode {
         return child1;
     }
 
-    public int getFrequentie(){
+    public int getFrequentie() {
         return frequentie;
+    }
+
+    public String getValue(){
+        return value;
+    }
+
+    public void setParent(TreeNode parent) {
+        this.parent = parent;
+    }
+
+    public TreeNode getParent() {
+        return parent;
+    }
+
+    public StringBuilder toBit() {
+        if (value != null) {
+            StringBuilder stringBuilder = new StringBuilder();
+            TreeNode currentNode = this;
+            while (currentNode.getParent() != null) {
+                if (currentNode.getParent().getChild0() == currentNode) {
+                    stringBuilder.insert(0, "0");
+                } else {
+                    stringBuilder.insert(0, "1");
+                }
+                currentNode = currentNode.getParent();
+            }
+            return stringBuilder;
+        }
+        return null;
     }
 
     @Override
