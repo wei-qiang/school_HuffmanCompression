@@ -46,12 +46,14 @@ public class TextCompressor {
      * This method generates a TreeNode for every character and links them together to create one big Tree
      */
     private void generateTreenodes() {
+        //make leafNodes
         map.forEach((key, value) -> {
             TreeNode leafNode = new TreeNode(value, key);
             queue.offer(leafNode);
             leafNodes.add(leafNode);
         });
 
+        //binds nodes till one root remains
         while (queue.size() > 1) {
             queue.offer(new TreeNode(queue.poll(), queue.poll()));
         }

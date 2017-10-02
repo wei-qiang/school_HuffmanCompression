@@ -2,7 +2,7 @@ package sample;
 
 import java.io.Serializable;
 
-public class TreeNode implements Serializable{
+public class TreeNode implements Serializable {
     private int frequentie;
     private TreeNode parent;
     private TreeNode child0;
@@ -35,7 +35,7 @@ public class TreeNode implements Serializable{
         return frequentie;
     }
 
-    public String getValue(){
+    public String getValue() {
         return value;
     }
 

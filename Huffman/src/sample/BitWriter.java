@@ -2,11 +2,11 @@ package sample;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 
 public class BitWriter {
     private char[] preBitChars;
@@ -33,12 +33,20 @@ public class BitWriter {
     }
 
     private void toByteArray() {
-        byteArray = new byte[bitChars.length / 8];
-        for (int i = 0; i < bitChars.length; i++) {
-            if (bitChars[i] == '1') {
-                byteArray[byteArray.length - (i / 8) - 1] |= 1 << (i % 8);
+        byteArray = new byte[bitChars.length / 7 + 1];
+
+        StringBuilder byt = new StringBuilder();
+        int counter = 0;
+        for (char bit : bitChars) {
+            byt.append(bit);
+            if (byt.length() == 7) {
+                byteArray[counter] = (byte) Integer.parseInt(byt.toString(), 2);
+                byt = new StringBuilder();
+                counter++;
             }
         }
+        byteArray[counter] = Byte.parseByte(byt.toString(), 2);
+
     }
 
     private void writeFile(TreeNode rootNode) {
@@ -53,7 +61,7 @@ public class BitWriter {
         }
 
         try {
-            fileOutputStream = new FileOutputStream("testTree");
+            fileOutputStream = new FileOutputStream("testTree.ser");
             objectOutputStream = new ObjectOutputStream(fileOutputStream);
             objectOutputStream.writeObject(rootNode);
         } catch (IOException e) {

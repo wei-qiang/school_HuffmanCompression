@@ -23,7 +23,7 @@
       <AnchorPane prefHeight="507.0" prefWidth="744.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
          <children>
             <Button fx:id="btnSave" layoutX="637.0" layoutY="108.0" mnemonicParsing="false" onAction="#handleButtonActionSave" prefHeight="25.0" prefWidth="86.0" text="Save" />
-            <Button fx:id="btnLoad" layoutX="637.0" layoutY="175.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="86.0" text="Load" />
+            <Button fx:id="btnLoad" layoutX="637.0" layoutY="175.0" mnemonicParsing="false" onAction="#handleButtonActionLoad" prefHeight="25.0" prefWidth="86.0" text="Load" />
             <TextArea fx:id="taText" layoutX="28.0" layoutY="28.0" prefHeight="445.0" prefWidth="589.0" />
          </children>
       </AnchorPane>

@@ -24,4 +24,10 @@ public class Controller {
         TextCompressor compressor = new TextCompressor(taText.getText());
     }
 
+    @FXML
+    public void handleButtonActionLoad(ActionEvent event){
+        TextDecrompressor textDecrompressor = new TextDecrompressor();
+        taText.setText(String.valueOf(textDecrompressor.decompressBits()));
+    }
+
 }
