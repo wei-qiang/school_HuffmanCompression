@@ -4,21 +4,19 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class BitReader {
-    private byte[] savedByte;
-    private StringBuilder bitString;
-
-    public BitReader() {
-    }
-
+    
     public StringBuilder readBits(String fileName) {
+        byte[] savedByte = null;
         Path path = Paths.get(fileName);
-        bitString = new StringBuilder();
+        StringBuilder bitString = new StringBuilder();
         try {
             savedByte = Files.readAllBytes(path);
         } catch (IOException e) {
-            e.printStackTrace();
+            Logger.getLogger(BitReader.class.getName()).log(Level.SEVERE, null, e);
         }
 
         if (savedByte != null) {

@@ -1,0 +1,6 @@
+projectKey=my:Huffman
+serverUrl=http://localhost:9000
+serverVersion=6.4.0.25310
+dashboardUrl=http://localhost:9000/dashboard/index/my:Huffman
+ceTaskId=AV7hpyK_d8cN_FexpMHx
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AV7hpyK_d8cN_FexpMHx

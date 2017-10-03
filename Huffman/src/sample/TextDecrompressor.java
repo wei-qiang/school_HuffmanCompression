@@ -2,12 +2,13 @@ package sample;
 
 import java.io.*;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class TextDecrompressor {
     private StringBuilder bitString = null;
-    private FileInputStream fileInputStream = null;
     private ObjectInputStream objectInputStream = null;
-    private TreeNode rootNode = null;
+    private FileInputStream fileInputStream = null;
 
     StringBuilder text = new StringBuilder();
     TreeNode currentNode = null;
@@ -16,50 +17,70 @@ public class TextDecrompressor {
     public TextDecrompressor() {
         BitReader bitReader = new BitReader();
         bitString = bitReader.readBits("test");
-        treeNodeReader("testTree.ser");
     }
 
-    private void treeNodeReader(String fileName) {
+    public StringBuilder getBitString() {
+        return bitString;
+    }
+
+    /**
+     * deze methode haalt de treenode op die geserialiseerd is
+     * @param fileName
+     * @return
+     */
+    public TreeNode treeNodeReader(String fileName) {
         try {
             fileInputStream = new FileInputStream(fileName);
             objectInputStream = new ObjectInputStream(fileInputStream);
-            rootNode = (TreeNode) objectInputStream.readObject();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            return (TreeNode) objectInputStream.readObject();
+        } catch (Exception e) {
+            Logger.getLogger(TextDecrompressor.class.getName()).log(Level.SEVERE, null, e);
         } finally {
             if (objectInputStream != null) {
                 try {
                     objectInputStream.close();
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    Logger.getLogger(TextDecrompressor.class.getName()).log(Level.SEVERE, null, e);
+                }
+            }
+            if(fileInputStream != null){
+                try {
+                    fileInputStream.close();
+                } catch (IOException e) {
+                    Logger.getLogger(TextDecrompressor.class.getName()).log(Level.SEVERE, null, e);
                 }
             }
         }
+        return null;
     }
 
-    public String decompressBits() {
+    /**
+     * deze methode vertaalt de bits om naar characters volgens de tree
+     * @param bitString
+     * @param rootnode
+     * @return
+     */
+    public String decompressBits(StringBuilder bitString, TreeNode rootnode) {
         ArrayList<String> bits = new ArrayList<>(Arrays.asList(bitString.toString().split("")));
-        currentNode = rootNode;
+        currentNode = rootnode;
 
-        while (bits.size() > 0) {
+        while (!bits.isEmpty()) {
             if (bits.get(0).equals("0")) {
-                checkChild(false);
+                checkChild(false, rootnode);
             } else {
-                checkChild(true);
+                checkChild(true, rootnode);
             }
             bits.remove(0);
         }
         while (!valueFound) {
-            checkChild(false);
+            checkChild(false, rootnode);
         }
 
-        return text.toString().substring(0,rootNode.getFrequentie());
+        return text.toString().substring(0, rootnode.getFrequentie());
 
     }
 
-    private void checkChild(boolean bit) {
+    private void checkChild(boolean bit, TreeNode rootNode) {
         if (bit) {
             if (currentNode.getChild1().getValue() != null) {
                 text.append(currentNode.getChild1().getValue());
@@ -80,5 +101,4 @@ public class TextDecrompressor {
             }
         }
     }
-
 }

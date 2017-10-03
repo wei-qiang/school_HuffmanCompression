@@ -6,24 +6,28 @@ import java.io.ObjectOutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class BitWriter {
-    private char[] preBitChars;
-    private int bitShortage;
     private char[] bitChars;
     private byte[] byteArray;
 
-
-    public BitWriter(StringBuilder bitString, TreeNode rootnode) {
+    /**
+     * deze methode schrijft de bits naar een bestand
+     * @param bitString
+     * @param rootnode
+     * @param path
+     */
+    public void writeBits(StringBuilder bitString, TreeNode rootnode, String path) {
         toCharArray(bitString);
         toByteArray();
-        writeFile(rootnode);
+        writeFile(rootnode, path);
     }
 
     private void toCharArray(StringBuilder bitString) {
-        preBitChars = bitString.toString().toCharArray();
-        bitShortage = (8 - (preBitChars.length % 8));
+        char[] preBitChars = bitString.toString().toCharArray();
+        int bitShortage = (8 - (preBitChars.length % 8));
         bitChars = new char[preBitChars.length + bitShortage];
         System.arraycopy(preBitChars, 0, bitChars, 0, preBitChars.length);
 
@@ -45,33 +49,42 @@ public class BitWriter {
                 counter++;
             }
         }
+        while (byt.length() < 7) {
+            byt.append("0");
+        }
         byteArray[counter] = Byte.parseByte(byt.toString(), 2);
-
     }
 
-    private void writeFile(TreeNode rootNode) {
+    private void writeFile(TreeNode rootNode, String path) {
         FileOutputStream fileOutputStream = null;
         ObjectOutputStream objectOutputStream = null;
 
-        Path file = Paths.get("test");
+        Path file = Paths.get(path);
         try {
             Files.write(file, byteArray);
         } catch (IOException e) {
-            e.printStackTrace();
+            Logger.getLogger(BitWriter.class.getName()).log(Level.SEVERE, null, e);
         }
 
         try {
-            fileOutputStream = new FileOutputStream("testTree.ser");
+            fileOutputStream = new FileOutputStream(path + "Tree.ser");
             objectOutputStream = new ObjectOutputStream(fileOutputStream);
             objectOutputStream.writeObject(rootNode);
         } catch (IOException e) {
-            e.printStackTrace();
+            Logger.getLogger(BitWriter.class.getName()).log(Level.SEVERE, null, e);
         } finally {
             if (objectOutputStream != null) {
                 try {
                     objectOutputStream.close();
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    Logger.getLogger(BitWriter.class.getName()).log(Level.SEVERE, null, e);
+                }
+            }
+            if (fileOutputStream != null) {
+                try {
+                    fileOutputStream.close();
+                } catch (IOException e) {
+                    Logger.getLogger(BitWriter.class.getName()).log(Level.SEVERE, null, e);
                 }
             }
         }

@@ -1,25 +1,13 @@
 package sample;
 
-import sun.reflect.generics.tree.Tree;
-
-import java.io.IOException;
 import java.util.*;
 
 public class TextCompressor {
     private ArrayList<String> characterList = new ArrayList<>();
     private HashMap<String, Integer> map = new HashMap<>();
     private PriorityQueue<TreeNode> queue = new PriorityQueue(1000, new FrequentieComparator());
-    private TreeNode rootNode = null;
     private HashMap<String, StringBuilder> treeNodeHashMap = new HashMap<>();
     private ArrayList<TreeNode> leafNodes = new ArrayList<>();
-
-    public TextCompressor(String words){
-        splitWords(words);
-        generateHashmapFrequentie();
-        generateTreenodes();
-        leafNodeToHashMap();
-        writeBitFile();
-    }
 
     private void splitWords(String words) {
         this.characterList = new ArrayList<>(Arrays.asList(words.split("")));
@@ -45,7 +33,10 @@ public class TextCompressor {
     /**
      * This method generates a TreeNode for every character and links them together to create one big Tree
      */
-    private void generateTreenodes() {
+    public TreeNode generateTreenodes(String words) {
+        splitWords(words);
+        generateHashmapFrequentie();
+
         //make leafNodes
         map.forEach((key, value) -> {
             TreeNode leafNode = new TreeNode(value, key);
@@ -57,7 +48,8 @@ public class TextCompressor {
         while (queue.size() > 1) {
             queue.offer(new TreeNode(queue.poll(), queue.poll()));
         }
-        rootNode = queue.peek();
+        return queue.peek();
+
     }
 
     /**
@@ -71,13 +63,23 @@ public class TextCompressor {
         }
     }
 
-    private void writeBitFile(){
+    /**
+     * deze metgode schrijft een bitbestand
+     * @param rootNode
+     * @param path
+     */
+    public void writeBitFile(TreeNode rootNode, String path) {
+        leafNodeToHashMap();
+        BitWriter bitWriter = new BitWriter();
+        bitWriter.writeBits(makeBitString(), rootNode, path);
+    }
+
+    public StringBuilder makeBitString() {
         StringBuilder bitString = new StringBuilder();
         for (String character : characterList) {
             bitString.append(treeNodeHashMap.get(character));
         }
-
-        BitWriter bitWriter = new BitWriter(bitString,rootNode);
+        return bitString;
     }
 }
 

@@ -47,6 +47,10 @@ public class TreeNode implements Serializable {
         return parent;
     }
 
+    /**
+     * deze methode maakt de bit code aan voor dit karakter
+     * @return
+     */
     public StringBuilder toBit() {
         if (value != null) {
             StringBuilder stringBuilder = new StringBuilder();
